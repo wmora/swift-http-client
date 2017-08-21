@@ -22,7 +22,7 @@ class HTTPClientTests: XCTestCase {
         httpClient.baseURL = "https://example.com"
         httpClient.get(url: "/get", params: params, callback: callback)
         
-        testNetworkClient.verify(method: "get", url: "https://example.com/get", params: params, contentType: ContentType.json, callback: callback)
+        testNetworkClient.verify(method: "get", url: "https://example.com/get", params: params, contentType: nil, callback: callback)
     }
     
     func testPut() {
@@ -59,8 +59,8 @@ class TestNetworkClient: NetworkClient {
         ]
     ]
     
-    func get(url: String, params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
-        recordInteraction(method: "get", url: url, params: params, contentType: contentType, callback: callback)
+    func get(url: String, params: [String : Any], callback: @escaping (HTTPResponse) -> Void) {
+        recordInteraction(method: "get", url: url, params: params, contentType: nil, callback: callback)
     }
     
     func put(url: String, params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
@@ -71,19 +71,24 @@ class TestNetworkClient: NetworkClient {
         recordInteraction(method: "post", url: url, params: params, contentType: contentType, callback: callback)
     }
     
-    private func recordInteraction(method: String, url: String, params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
+    private func recordInteraction(method: String, url: String, params: [String : Any], contentType: ContentType?, callback: @escaping (HTTPResponse) -> Void) {
         if var calls = interactions[method]?["calls"] as? [[String: Any]] {
-            calls.append([
+            var call = [
                 "url": url,
                 "params": params,
-                "contentType": contentType,
                 "callback": callback
-                ])
+            ] as [String : Any]
+            
+            if let contentType = contentType {
+                call["contentType"] = contentType
+            }
+            
+            calls.append(call)
             interactions[method]?["calls"] = calls
         }
     }
     
-    func verify(method: String, url: String, params: [String: Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
+    func verify(method: String, url: String, params: [String: Any], contentType: ContentType?, callback: @escaping (HTTPResponse) -> Void) {
         
         let calls: [[String: Any]] = interactions[method]?["calls"] as! [[String : Any]]
         let callObserver = calls.first!

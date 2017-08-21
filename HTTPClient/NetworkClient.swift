@@ -8,7 +8,7 @@
 
 protocol NetworkClient {
     
-    func get(url: String, params: [String: Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void)
+    func get(url: String, params: [String: Any], callback: @escaping (HTTPResponse) -> Void)
     
     func put(url: String, params: [String: Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void)
     

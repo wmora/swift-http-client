@@ -23,7 +23,7 @@ class HTTPClient {
     }
     
     func get(url: String, params: [String: Any], callback: @escaping (HTTPResponse) -> Void) {
-        networkClient.get(url: fullURL(url: url), params: params, contentType: ContentType.json, callback: callback)
+        networkClient.get(url: fullURL(url: url), params: params, callback: callback)
     }
     
     func put(url: String, params: [String: Any], callback: @escaping (HTTPResponse) -> Void) {
