@@ -9,7 +9,11 @@
 /* Begin PBXBuildFile section */
 		2725C8041F49F86400AAD0CD /* HTTPClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2725C7FA1F49F86400AAD0CD /* HTTPClient.framework */; };
 		2725C8091F49F86400AAD0CD /* HTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2725C8081F49F86400AAD0CD /* HTTPClientTests.swift */; };
-		2725C80B1F49F86400AAD0CD /* HTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 2725C7FD1F49F86400AAD0CD /* HTTPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2725C8151F49F89A00AAD0CD /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2725C8141F49F89A00AAD0CD /* HTTPResponse.swift */; };
+		2725C8171F49F8A300AAD0CD /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2725C8161F49F8A300AAD0CD /* HTTPClient.swift */; };
+		2725C81B1F4A01D600AAD0CD /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2725C81A1F4A01D600AAD0CD /* ContentType.swift */; };
+		2725C81D1F4A023600AAD0CD /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2725C81C1F4A023600AAD0CD /* NetworkClient.swift */; };
+		2725C81F1F4A038500AAD0CD /* DefaultNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2725C81E1F4A038500AAD0CD /* DefaultNetworkClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,11 +28,15 @@
 
 /* Begin PBXFileReference section */
 		2725C7FA1F49F86400AAD0CD /* HTTPClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HTTPClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2725C7FD1F49F86400AAD0CD /* HTTPClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPClient.h; sourceTree = "<group>"; };
 		2725C7FE1F49F86400AAD0CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2725C8031F49F86400AAD0CD /* HTTPClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HTTPClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2725C8081F49F86400AAD0CD /* HTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientTests.swift; sourceTree = "<group>"; };
 		2725C80A1F49F86400AAD0CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2725C8141F49F89A00AAD0CD /* HTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
+		2725C8161F49F8A300AAD0CD /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		2725C81A1F4A01D600AAD0CD /* ContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
+		2725C81C1F4A023600AAD0CD /* NetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		2725C81E1F4A038500AAD0CD /* DefaultNetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultNetworkClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +79,12 @@
 		2725C7FC1F49F86400AAD0CD /* HTTPClient */ = {
 			isa = PBXGroup;
 			children = (
-				2725C7FD1F49F86400AAD0CD /* HTTPClient.h */,
+				2725C8161F49F8A300AAD0CD /* HTTPClient.swift */,
+				2725C8141F49F89A00AAD0CD /* HTTPResponse.swift */,
+				2725C81A1F4A01D600AAD0CD /* ContentType.swift */,
 				2725C7FE1F49F86400AAD0CD /* Info.plist */,
+				2725C81C1F4A023600AAD0CD /* NetworkClient.swift */,
+				2725C81E1F4A038500AAD0CD /* DefaultNetworkClient.swift */,
 			);
 			path = HTTPClient;
 			sourceTree = "<group>";
@@ -93,7 +105,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2725C80B1F49F86400AAD0CD /* HTTPClient.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +159,7 @@
 				TargetAttributes = {
 					2725C7F91F49F86400AAD0CD = {
 						CreatedOnToolsVersion = 8.3.3;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					2725C8021F49F86400AAD0CD = {
@@ -196,6 +208,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2725C8171F49F8A300AAD0CD /* HTTPClient.swift in Sources */,
+				2725C8151F49F89A00AAD0CD /* HTTPResponse.swift in Sources */,
+				2725C81B1F4A01D600AAD0CD /* ContentType.swift in Sources */,
+				2725C81F1F4A038500AAD0CD /* DefaultNetworkClient.swift in Sources */,
+				2725C81D1F4A023600AAD0CD /* NetworkClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +339,7 @@
 		2725C80F1F49F86400AAD0CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -333,6 +351,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wmora.HTTPClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -340,6 +359,7 @@
 		2725C8101F49F86400AAD0CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -358,6 +378,7 @@
 		2725C8121F49F86400AAD0CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = HTTPClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wmora.HTTPClientTests;
@@ -369,6 +390,7 @@
 		2725C8131F49F86400AAD0CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = HTTPClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wmora.HTTPClientTests;
