@@ -9,10 +9,10 @@
 class HTTPResponse {
     
     var statusCode: Int
-    var headers: [String: Any]
+    var headers: [AnyHashable: Any]
     var data: [String: Any]
     
-    init(statusCode: Int, headers: [String: Any], data: [String: Any]) {
+    init(statusCode: Int, headers: [AnyHashable: Any], data: [String: Any]) {
         self.statusCode = statusCode
         self.headers = headers
         self.data = data
