@@ -3,3 +3,6 @@ os: osx
 osx_image: xcode8.3
 xcode_project: HTTPClient.xcodeproj
 xcode_scheme: HTTPClient
+
+script:
+  -  ./test.sh
