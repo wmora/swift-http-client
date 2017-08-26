@@ -11,8 +11,8 @@ import Foundation
 class DefaultNetworkClient: NetworkClient {
  
     func get(url: String, params: [String : Any], callback: @escaping (HTTPResponse) -> Void) {
-        
-        let task = URLSession.shared.dataTask(with: URL(string: url)!) { (data: Data?, response: URLResponse?, error: Error?) in
+        let url = URL(string: "\(url)\(params.queryString())")!
+        let task = URLSession.shared.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
             if let response = response as? HTTPURLResponse {
                 var responseData: [String: Any] = [:]
                 
