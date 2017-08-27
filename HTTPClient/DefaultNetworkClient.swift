@@ -17,7 +17,11 @@ class DefaultNetworkClient: NetworkClient {
             return
         }
         
-        let task = URLSession.shared.dataTask(with: requestUrl) { (data: Data?, response: URLResponse?, error: Error?) in
+        var request = URLRequest(url: requestUrl)
+        request.allHTTPHeaderFields = headers
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
             guard let response = response as? HTTPURLResponse else {
                 return
             }
