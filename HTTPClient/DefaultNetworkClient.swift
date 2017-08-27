@@ -10,7 +10,7 @@ import Foundation
 
 class DefaultNetworkClient: NetworkClient {
  
-    func get(url: String, params: [String : Any], callback: @escaping (HTTPResponse) -> Void) {
+    func get(url: String, headers: [String: String], params: [String : Any], callback: @escaping (HTTPResponse) -> Void) {
         
         guard let requestUrl = URL(string: "\(url)\(params.queryString())") else {
             print("Invalid url \(url)")
@@ -40,11 +40,11 @@ class DefaultNetworkClient: NetworkClient {
         
     }
     
-    func post(url: String, params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
+    func post(url: String, headers: [String: String], params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
         
     }
     
-    func put(url: String, params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
+    func put(url: String, headers: [String: String], params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
         
     }
     

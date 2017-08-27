@@ -12,6 +12,7 @@ import XCTest
 class HTTPClientTests: XCTestCase {
     
     let params = ["a": "b"]
+    let headers = ["some": "header"]
     let callback = { (response: HTTPResponse) -> Void in
         
     }
@@ -20,27 +21,30 @@ class HTTPClientTests: XCTestCase {
         let testNetworkClient = TestNetworkClient()
         let httpClient = HTTPClient(networkClient: testNetworkClient)
         httpClient.baseURL = "https://example.com"
+        httpClient.headers = headers
         httpClient.get(url: "/get", params: params, callback: callback)
         
-        testNetworkClient.verify(method: "get", url: "https://example.com/get", params: params, contentType: nil, callback: callback)
+        testNetworkClient.verify(method: "get", url: "https://example.com/get", headers: headers, params: params, contentType: nil, callback: callback)
     }
     
     func testPut() {
         let testNetworkClient = TestNetworkClient()
         let httpClient = HTTPClient(networkClient: testNetworkClient)
         httpClient.baseURL = "https://example.com"
+        httpClient.headers = headers
         httpClient.put(url: "/put", params: params, callback: callback)
         
-        testNetworkClient.verify(method: "put", url: "https://example.com/put", params: params, contentType: ContentType.json, callback: callback)
+        testNetworkClient.verify(method: "put", url: "https://example.com/put", headers: headers, params: params, contentType: ContentType.json, callback: callback)
     }
     
     func testPost() {
         let testNetworkClient = TestNetworkClient()
         let httpClient = HTTPClient(networkClient: testNetworkClient)
         httpClient.baseURL = "https://example.com"
+        httpClient.headers = headers
         httpClient.post(url: "/post", params: params, contentType: ContentType.json, callback: callback)
         
-        testNetworkClient.verify(method: "post", url: "https://example.com/post", params: params, contentType: ContentType.json, callback: callback)
+        testNetworkClient.verify(method: "post", url: "https://example.com/post", headers: headers, params: params, contentType: ContentType.json, callback: callback)
     }
     
 }
@@ -59,22 +63,23 @@ class TestNetworkClient: NetworkClient {
         ]
     ]
     
-    func get(url: String, params: [String : Any], callback: @escaping (HTTPResponse) -> Void) {
-        recordInteraction(method: "get", url: url, params: params, contentType: nil, callback: callback)
+    func get(url: String, headers: [String: String], params: [String : Any], callback: @escaping (HTTPResponse) -> Void) {
+        recordInteraction(method: "get", url: url, headers: headers, params: params, contentType: nil, callback: callback)
     }
     
-    func put(url: String, params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
-        recordInteraction(method: "put", url: url, params: params, contentType: contentType, callback: callback)
+    func put(url: String, headers: [String: String], params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
+        recordInteraction(method: "put", url: url, headers: headers, params: params, contentType: contentType, callback: callback)
     }
     
-    func post(url: String, params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
-        recordInteraction(method: "post", url: url, params: params, contentType: contentType, callback: callback)
+    func post(url: String, headers: [String: String], params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
+        recordInteraction(method: "post", url: url, headers: headers, params: params, contentType: contentType, callback: callback)
     }
     
-    private func recordInteraction(method: String, url: String, params: [String : Any], contentType: ContentType?, callback: @escaping (HTTPResponse) -> Void) {
+    private func recordInteraction(method: String, url: String, headers: [String: String], params: [String : Any], contentType: ContentType?, callback: @escaping (HTTPResponse) -> Void) {
         if var calls = interactions[method]?["calls"] as? [[String: Any]] {
             var call = [
                 "url": url,
+                "headers": headers,
                 "params": params,
                 "callback": callback
             ] as [String : Any]
@@ -88,7 +93,7 @@ class TestNetworkClient: NetworkClient {
         }
     }
     
-    func verify(method: String, url: String, params: [String: Any], contentType: ContentType?, callback: @escaping (HTTPResponse) -> Void) {
+    func verify(method: String, url: String, headers: [String: String], params: [String: Any], contentType: ContentType?, callback: @escaping (HTTPResponse) -> Void) {
         
         let calls: [[String: Any]] = interactions[method]?["calls"] as! [[String : Any]]
         let callObserver = calls.first!
@@ -96,6 +101,7 @@ class TestNetworkClient: NetworkClient {
         XCTAssertTrue(calls.count == 1)
         XCTAssertEqual(callObserver["url"] as? String, url)
         XCTAssertEqual(NSDictionary(dictionary: callObserver["params"] as! [String: Any]), NSDictionary(dictionary: params))
+        XCTAssertEqual((callObserver["headers"] as? [String: String])!, headers)
         XCTAssertEqual(callObserver["contentType"] as? ContentType, contentType)
         XCTAssertNotNil(callObserver["callback"])
     }

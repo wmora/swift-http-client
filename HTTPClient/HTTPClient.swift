@@ -23,15 +23,15 @@ class HTTPClient {
     }
     
     func get(url: String, params: [String: Any], callback: @escaping (HTTPResponse) -> Void) {
-        networkClient.get(url: fullURL(url: url), params: params, callback: callback)
+        networkClient.get(url: fullURL(url: url), headers: headers, params: params, callback: callback)
     }
     
     func put(url: String, params: [String: Any], callback: @escaping (HTTPResponse) -> Void) {
-        networkClient.put(url: fullURL(url: url), params: params, contentType: ContentType.json, callback: callback)
+        networkClient.put(url: fullURL(url: url), headers: headers, params: params, contentType: ContentType.json, callback: callback)
     }
     
     func post(url: String, params: [String: Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
-        networkClient.post(url: fullURL(url: url), params: params, contentType: contentType, callback: callback)
+        networkClient.post(url: fullURL(url: url), headers: headers, params: params, contentType: contentType, callback: callback)
     }
     
     func fullURL(url: String) -> String {
