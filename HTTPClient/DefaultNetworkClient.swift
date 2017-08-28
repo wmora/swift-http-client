@@ -21,6 +21,28 @@ class DefaultNetworkClient: NetworkClient {
         request.allHTTPHeaderFields = headers
         request.httpMethod = "GET"
         
+        executeTask(request: request, callback: callback)
+    }
+    
+    func post(url: String, headers: [String: String], params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
+        guard let requestUrl = URL(string: url) else {
+            print("Invalid url \(url)")
+            return
+        }
+        
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = headers
+//        request.httpBody = params
+        
+        executeTask(request: request, callback: callback)
+    }
+    
+    func put(url: String, headers: [String: String], params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
+        
+    }
+    
+    func executeTask(request: URLRequest, callback: @escaping (HTTPResponse) -> Void) {
         let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
             guard let response = response as? HTTPURLResponse else {
                 return
@@ -41,15 +63,6 @@ class DefaultNetworkClient: NetworkClient {
         }
         
         task.resume()
-        
-    }
-    
-    func post(url: String, headers: [String: String], params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
-        
-    }
-    
-    func put(url: String, headers: [String: String], params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
-        
     }
     
 }
