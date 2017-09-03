@@ -6,17 +6,19 @@
 //  Copyright © 2017 William Mora. All rights reserved.
 //
 
-class HTTPResponse {
+public class HTTPResponse {
     
-    var statusCode: Int
-    var headers: [AnyHashable: Any]
-    var data: [String: Any] = [:]
+    public let statusCode: Int
+    public let headers: [AnyHashable: Any]
+    public let data: [String: Any]
     
     init(statusCode: Int, headers: [AnyHashable: Any], data: [String: Any]?) {
         self.statusCode = statusCode
         self.headers = headers
         if let data = data {
             self.data = data
+        } else {
+            self.data = [:]
         }
     }
     

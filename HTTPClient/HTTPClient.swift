@@ -8,13 +8,13 @@
 
 import Foundation
 
-class HTTPClient {
+public class HTTPClient {
     
     var baseURL: String = ""
     var headers: [String: String] = [:]
     let networkClient: NetworkClient
     
-    convenience init() {
+    public convenience init() {
         self.init(networkClient: DefaultNetworkClient())
     }
     
@@ -22,7 +22,7 @@ class HTTPClient {
         self.networkClient = networkClient
     }
     
-    func get(url: String, params: [String: Any], callback: @escaping (HTTPResponse) -> Void = {_ in }) {
+    public func get(url: String, params: [String: Any], callback: @escaping (HTTPResponse) -> Void = {_ in }) {
         networkClient.get(url: fullURL(url: url), headers: headers, params: params, callback: callback)
     }
     
