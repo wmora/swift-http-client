@@ -10,8 +10,8 @@ protocol NetworkClient {
     
     func get(url: String, headers: [String: String], params: [String: Any], callback: @escaping (HTTPResponse) -> Void)
     
-    func put(url: String, headers: [String: String], params: [String: Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void)
+    func put(url: String, headers: [String: String], params: Codable, contentType: ContentType, callback: @escaping (HTTPResponse) -> Void)
     
-    func post(url: String, headers: [String: String], params: [String: Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void)
+    func post<T>(url: String, headers: [String: String], params: T?, contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) where T: Codable
     
 }
