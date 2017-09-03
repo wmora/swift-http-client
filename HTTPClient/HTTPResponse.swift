@@ -10,12 +10,14 @@ class HTTPResponse {
     
     var statusCode: Int
     var headers: [AnyHashable: Any]
-    var data: [String: Any]
+    var data: [String: Any] = [:]
     
-    init(statusCode: Int, headers: [AnyHashable: Any], data: [String: Any]) {
+    init(statusCode: Int, headers: [AnyHashable: Any], data: [String: Any]?) {
         self.statusCode = statusCode
         self.headers = headers
-        self.data = data
+        if let data = data {
+            self.data = data
+        }
     }
     
 }

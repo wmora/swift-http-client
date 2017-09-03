@@ -67,15 +67,15 @@ class TestNetworkClient: NetworkClient {
         recordInteraction(method: "get", url: url, headers: headers, params: params, contentType: nil, callback: callback)
     }
     
-    func put(url: String, headers: [String: String], params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
+    func put(url: String, headers: [String : String], params: Codable, contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
         recordInteraction(method: "put", url: url, headers: headers, params: params, contentType: contentType, callback: callback)
     }
     
-    func post(url: String, headers: [String: String], params: [String : Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
-        recordInteraction(method: "post", url: url, headers: headers, params: params, contentType: contentType, callback: callback)
+    func post<T>(url: String, headers: [String : String], params: T?, contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) where T : Decodable, T : Encodable {
+        recordInteraction(method: "post", url: url, headers: headers, params: params ?? String(), contentType: contentType, callback: callback)
     }
     
-    private func recordInteraction(method: String, url: String, headers: [String: String], params: [String : Any], contentType: ContentType?, callback: @escaping (HTTPResponse) -> Void) {
+    private func recordInteraction(method: String, url: String, headers: [String: String], params: Any, contentType: ContentType?, callback: @escaping (HTTPResponse) -> Void) {
         if var calls = interactions[method]?["calls"] as? [[String: Any]] {
             var call = [
                 "url": url,
