@@ -12,7 +12,7 @@ import XCTest
 class HTTPClientTests: XCTestCase {
     
     let params = ["a": "b"]
-    let headers = ["some": "header"]
+    var headers = ["some": "header"]
     let callback = { (response: HTTPResponse) -> Void in
         
     }
@@ -42,8 +42,9 @@ class HTTPClientTests: XCTestCase {
         let httpClient = HTTPClient(networkClient: testNetworkClient)
         httpClient.baseURL = "https://example.com"
         httpClient.headers = headers
-        httpClient.post(url: "/post", params: params, contentType: ContentType.json, callback: callback)
+        httpClient.post(url: "/post", params: params, callback: callback)
         
+        headers["Content-Type"] = ContentType.json.rawValue
         testNetworkClient.verify(method: "post", url: "https://example.com/post", headers: headers, params: params, contentType: ContentType.json, callback: callback)
     }
     
