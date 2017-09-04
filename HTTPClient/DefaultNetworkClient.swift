@@ -10,9 +10,9 @@ import Foundation
 
 class DefaultNetworkClient: NetworkClient {
  
-    func get(url: String, headers: [String: String], params: [String : Any], callback: @escaping (HTTPResponse) -> Void) {
-        
-        guard let requestUrl = URL(string: "\(url)\(params.queryString())") else {
+    func get(url: String, headers: [String: String], params: [String : Any]?, callback: @escaping (HTTPResponse) -> Void) {
+        let requestParams = params ?? [:]
+        guard let requestUrl = URL(string: "\(url)\(requestParams.queryString())") else {
             print("Invalid url \(url)")
             return
         }

@@ -22,7 +22,7 @@ public class HTTPClient {
         self.networkClient = networkClient
     }
     
-    public func get(url: String, params: [String: Any], callback: @escaping (HTTPResponse) -> Void = {_ in }) {
+    public func get(url: String, params: [String: Any]?, callback: @escaping (HTTPResponse) -> Void = {_ in }) {
         networkClient.get(url: fullURL(url: url), headers: headers, params: params, callback: callback)
     }
     

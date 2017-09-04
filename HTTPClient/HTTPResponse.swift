@@ -15,11 +15,7 @@ public class HTTPResponse {
     init(statusCode: Int, headers: [String: String], data: [String: Any]?) {
         self.statusCode = statusCode
         self.headers = headers
-        if let data = data {
-            self.data = data
-        } else {
-            self.data = [:]
-        }
+        self.data = data ?? [:]
     }
     
     public func isSuccessful() -> Bool {

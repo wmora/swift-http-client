@@ -63,8 +63,8 @@ class TestNetworkClient: NetworkClient {
         ]
     ]
     
-    func get(url: String, headers: [String: String], params: [String : Any], callback: @escaping (HTTPResponse) -> Void) {
-        recordInteraction(method: "get", url: url, headers: headers, params: params, contentType: nil, callback: callback)
+    func get(url: String, headers: [String: String], params: [String : Any]?, callback: @escaping (HTTPResponse) -> Void) {
+        recordInteraction(method: "get", url: url, headers: headers, params: params ?? [:], contentType: nil, callback: callback)
     }
     
     func put(url: String, headers: [String : String], params: Codable, contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
