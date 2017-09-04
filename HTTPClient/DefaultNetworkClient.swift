@@ -65,8 +65,7 @@ class DefaultNetworkClient: NetworkClient {
                 }
             }
             
-            callback(HTTPResponse(statusCode: response.statusCode, headers: response.allHeaderFields, data: responseData))
-            
+            callback(HTTPResponse(statusCode: response.statusCode, headers: response.allHeaderFields as! [String: String], data: responseData))
         }
         
         task.resume()

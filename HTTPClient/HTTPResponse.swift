@@ -9,10 +9,10 @@
 public class HTTPResponse {
     
     public let statusCode: Int
-    public let headers: [AnyHashable: Any]
+    public let headers: [String: String]
     public let data: [String: Any]
     
-    init(statusCode: Int, headers: [AnyHashable: Any], data: [String: Any]?) {
+    init(statusCode: Int, headers: [String: String], data: [String: Any]?) {
         self.statusCode = statusCode
         self.headers = headers
         if let data = data {
@@ -20,6 +20,10 @@ public class HTTPResponse {
         } else {
             self.data = [:]
         }
+    }
+    
+    public func isSuccessful() -> Bool {
+        return statusCode >= 200 && statusCode < 300
     }
     
 }

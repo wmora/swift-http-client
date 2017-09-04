@@ -16,6 +16,7 @@
 		2725C81F1F4A038500AAD0CD /* DefaultNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2725C81E1F4A038500AAD0CD /* DefaultNetworkClient.swift */; };
 		27339B031F5211F100331D0B /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27339B021F5211F100331D0B /* Dictionary.swift */; };
 		27339B051F5217E100331D0B /* DicitionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27339B041F5217E100331D0B /* DicitionaryTests.swift */; };
+		274054711F5DAAEE006BED10 /* HTTPResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274054701F5DAAEE006BED10 /* HTTPResponseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		2725C81E1F4A038500AAD0CD /* DefaultNetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultNetworkClient.swift; sourceTree = "<group>"; };
 		27339B021F5211F100331D0B /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		27339B041F5217E100331D0B /* DicitionaryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DicitionaryTests.swift; sourceTree = "<group>"; };
+		274054701F5DAAEE006BED10 /* HTTPResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				2725C80A1F49F86400AAD0CD /* Info.plist */,
 				2725C8081F49F86400AAD0CD /* HTTPClientTests.swift */,
 				27339B041F5217E100331D0B /* DicitionaryTests.swift */,
+				274054701F5DAAEE006BED10 /* HTTPResponseTests.swift */,
 			);
 			path = HTTPClientTests;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2725C8091F49F86400AAD0CD /* HTTPClientTests.swift in Sources */,
+				274054711F5DAAEE006BED10 /* HTTPResponseTests.swift in Sources */,
 				27339B051F5217E100331D0B /* DicitionaryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
