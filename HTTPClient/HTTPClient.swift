@@ -30,7 +30,11 @@ public class HTTPClient {
         networkClient.put(url: fullURL(url: url), headers: headers, params: params, contentType: ContentType.json, callback: callback)
     }
     
-    func post(url: String, params: [String: Any], contentType: ContentType, callback: @escaping (HTTPResponse) -> Void = {_ in }) {
+    public func post<T>(url: String, params: T?, callback: @escaping (HTTPResponse) -> Void = {_ in }) where T: Codable {
+        networkClient.post(url: fullURL(url: url), headers: headers, params: params, contentType: ContentType.json, callback: callback)
+    }
+    
+    func post<T>(url: String, params: T?, contentType: ContentType = ContentType.json, callback: @escaping (HTTPResponse) -> Void = {_ in }) where T: Codable {
         networkClient.post(url: fullURL(url: url), headers: headers, params: params, contentType: contentType, callback: callback)
     }
     
