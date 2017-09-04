@@ -59,7 +59,7 @@ class DefaultNetworkClient: NetworkClient {
             
             if let data = data {
                 do {
-                    responseData = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                    responseData = try JSONSerialization.jsonObject(with: data) as! [String: Any]
                 } catch let error {
                     print("Response data decoding failed: \(error)")
                 }

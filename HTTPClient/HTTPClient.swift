@@ -10,8 +10,8 @@ import Foundation
 
 public class HTTPClient {
     
-    var baseURL: String = ""
-    var headers: [String: String] = [:]
+    public var baseURL: String = ""
+    public var headers: [String: String] = [:]
     let networkClient: NetworkClient
     
     public convenience init() {
@@ -31,10 +31,11 @@ public class HTTPClient {
     }
     
     public func post<T>(url: String, params: T?, callback: @escaping (HTTPResponse) -> Void = {_ in }) where T: Codable {
-        networkClient.post(url: fullURL(url: url), headers: headers, params: params, contentType: ContentType.json, callback: callback)
+        post(url: url, params: params, contentType: ContentType.json, callback: callback)
     }
     
     func post<T>(url: String, params: T?, contentType: ContentType = ContentType.json, callback: @escaping (HTTPResponse) -> Void = {_ in }) where T: Codable {
+        headers["Content-Type"] = contentType.rawValue
         networkClient.post(url: fullURL(url: url), headers: headers, params: params, contentType: contentType, callback: callback)
     }
     
