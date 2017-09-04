@@ -11,23 +11,19 @@ import HTTPClient
 
 class ViewController: UIViewController {
 
+    let httpClient = HTTPClient()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        let httpClient = HTTPClient()
-        print(httpClient)
+    }
+
+    @IBAction func getButtonDidTouchUpInside(_ sender: UIButton) {
         httpClient.get(url: "https://jsonplaceholder.typicode.com/posts/1", params: [:], callback: { (response: HTTPResponse) in
             print("\(response.statusCode)")
             print("\(response.headers)")
             print("\(response.data)")
         })
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 
