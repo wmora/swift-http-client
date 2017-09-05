@@ -30,23 +30,23 @@ class ViewController: UIViewController {
     @IBAction func putButtonDidTouchUpInside(_ sender: Any) {
         let putObject = RequestObject(userId: 1, title: "Some todo item", completed: false)
         
-        httpClient.put(url: "/todos/1", params: putObject) { (response: HTTPResponse) in
+        httpClient.put(url: "/todos/1", params: putObject, callback: { (response: HTTPResponse) in
             print("PUT request complete:")
             print("\(response.statusCode)")
             print("\(response.headers)")
             print("\(response.data)")
-        }
+        })
     }
 
     @IBAction func postButtonDidTouchUpInside(_ sender: UIButton) {
         let postObject = RequestObject(userId: 1, title: "Some todo item", completed: true)
         
-        httpClient.post(url: "/todos", params: postObject) { (response: HTTPResponse) in
+        httpClient.post(url: "/todos", params: postObject, callback: { (response: HTTPResponse) in
             print("POST request complete:")
             print("\(response.statusCode)")
             print("\(response.headers)")
             print("\(response.data)")
-        }
+        })
     }
     
 }
