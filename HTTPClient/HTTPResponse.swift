@@ -10,9 +10,9 @@ public class HTTPResponse {
     
     public let statusCode: Int
     public let headers: [String: String]
-    public let data: [String: Any]
+    public let data: Any
     
-    init(statusCode: Int, headers: [String: String], data: [String: Any]?) {
+    init(statusCode: Int, headers: [String: String], data: Any?) {
         self.statusCode = statusCode
         self.headers = headers
         self.data = data ?? [:]

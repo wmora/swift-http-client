@@ -72,11 +72,11 @@ class DefaultNetworkClient: NetworkClient {
                 return
             }
             
-            var responseData: [String: Any] = [:]
+            var responseData: Any?
             
             if let data = data {
                 do {
-                    responseData = try JSONSerialization.jsonObject(with: data) as! [String: Any]
+                    responseData = try JSONSerialization.jsonObject(with: data)
                 } catch let error {
                     print("Response data decoding failed: \(error)")
                 }
