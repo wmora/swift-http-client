@@ -34,7 +34,8 @@ class HTTPClientTests: XCTestCase {
         httpClient.headers = headers
         httpClient.put(url: "/put", params: params, callback: callback)
         
-        testNetworkClient.verify(method: "put", url: "https://example.com/put", headers: headers, params: params, contentType: ContentType.json, callback: callback)
+        headers["Content-Type"] = ContentType.json.rawValue
+        testNetworkClient.verify(method: "put", url: "https://example.com/put", headers: headers, params: params, contentType: nil, callback: callback)
     }
     
     func testPost() {
@@ -68,8 +69,8 @@ class TestNetworkClient: NetworkClient {
         recordInteraction(method: "get", url: url, headers: headers, params: params ?? [:], contentType: nil, callback: callback)
     }
     
-    func put(url: String, headers: [String : String], params: Codable, contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
-        recordInteraction(method: "put", url: url, headers: headers, params: params, contentType: contentType, callback: callback)
+    func put(url: String, headers: [String : String], params: Codable, callback: @escaping (HTTPResponse) -> Void) {
+        recordInteraction(method: "put", url: url, headers: headers, params: params, contentType: nil, callback: callback)
     }
     
     func post<T>(url: String, headers: [String : String], params: T?, contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) where T : Decodable, T : Encodable {

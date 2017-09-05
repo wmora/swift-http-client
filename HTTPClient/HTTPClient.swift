@@ -27,7 +27,8 @@ public class HTTPClient {
     }
     
     func put(url: String, params: [String: Any], callback: @escaping (HTTPResponse) -> Void = {_ in }) {
-        networkClient.put(url: fullURL(url: url), headers: headers, params: params, contentType: ContentType.json, callback: callback)
+        headers["Content-Type"] = ContentType.json.rawValue
+        networkClient.put(url: fullURL(url: url), headers: headers, params: params, callback: callback)
     }
     
     public func post<T>(url: String, params: T?, callback: @escaping (HTTPResponse) -> Void = {_ in }) where T: Codable {

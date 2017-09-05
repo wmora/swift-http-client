@@ -45,7 +45,7 @@ class DefaultNetworkClient: NetworkClient {
         executeTask(request: request, callback: callback)
     }
     
-    func put(url: String, headers: [String: String], params: Codable, contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) {
+    func put(url: String, headers: [String: String], params: Codable, callback: @escaping (HTTPResponse) -> Void) {
         // TODO: Implement me!
     }
     
