@@ -24,7 +24,7 @@ class DefaultNetworkClient: NetworkClient {
         executeTask(request: request, callback: callback)
     }
     
-    func post<T>(url: String, headers: [String : String], params: T?, contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) where T : Decodable, T : Encodable {
+    func post<T>(url: String, headers: [String : String], params: T?, contentType: ContentType, callback: @escaping (HTTPResponse) -> Void) where T : Codable {
         guard let requestUrl = URL(string: url) else {
             print("Invalid url \(url)")
             return
@@ -38,15 +38,32 @@ class DefaultNetworkClient: NetworkClient {
             do {
                 request.httpBody = try JSONEncoder().encode(params)
             } catch let error {
-                print("Params encoding failed: \(error)")
+                print("Params encoding failed: \(error). Ignoring call")
+                return
             }
         }
         
         executeTask(request: request, callback: callback)
     }
     
-    func put(url: String, headers: [String: String], params: Codable, callback: @escaping (HTTPResponse) -> Void) {
-        // TODO: Implement me!
+    func put<T>(url: String, headers: [String: String], params: T, callback: @escaping (HTTPResponse) -> Void) where T : Codable {
+        guard let requestUrl = URL(string: url) else {
+            print("Invalid url \(url)")
+            return
+        }
+        
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "PUT"
+        request.allHTTPHeaderFields = headers
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(params)
+        } catch let error {
+            print("Params encoding failed: \(error). Ignoring call")
+            return
+        }
+        
+        executeTask(request: request, callback: callback)
     }
     
     func executeTask(request: URLRequest, callback: @escaping (HTTPResponse) -> Void) {

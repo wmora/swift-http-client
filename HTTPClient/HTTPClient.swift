@@ -26,7 +26,7 @@ public class HTTPClient {
         networkClient.get(url: fullURL(url: url), headers: headers, params: params, callback: callback)
     }
     
-    func put(url: String, params: [String: Any], callback: @escaping (HTTPResponse) -> Void = {_ in }) {
+    func put<T>(url: String, params: T, callback: @escaping (HTTPResponse) -> Void = {_ in }) where T: Codable {
         headers["Content-Type"] = ContentType.json.rawValue
         networkClient.put(url: fullURL(url: url), headers: headers, params: params, callback: callback)
     }
