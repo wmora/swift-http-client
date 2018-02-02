@@ -8,13 +8,14 @@
 
 import Foundation
 
-public class HTTPClient {
+@objc
+public class HTTPClient : NSObject {
     
-    public var baseURL: String = ""
+    @objc public var baseURL: String = ""
     public var headers: [String: String] = [:]
     let networkClient: NetworkClient
     
-    public convenience init() {
+    public convenience override init() {
         self.init(networkClient: DefaultNetworkClient())
     }
     
@@ -22,7 +23,7 @@ public class HTTPClient {
         self.networkClient = networkClient
     }
     
-    public func get(url: String, params: [String: Any]?, callback: @escaping (HTTPResponse) -> Void = {_ in }) {
+    @objc public func get(url: String, params: [String: Any], callback: @escaping (HTTPResponse) -> Void = {_ in }) {
         networkClient.get(url: fullURL(url: url), headers: headers, params: params, callback: callback)
     }
     
