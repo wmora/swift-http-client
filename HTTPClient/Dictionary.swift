@@ -18,7 +18,7 @@ extension Dictionary {
         var queryString = "?"
         
         for (key, value) in self {
-            let prefix = queryString.characters.count == 1 ? "" : "&"
+            let prefix = queryString.count == 1 ? "" : "&"
             queryString = "\(queryString)\(prefix)\(key)=\(value)"
         }
         
