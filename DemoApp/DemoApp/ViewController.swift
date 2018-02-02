@@ -12,6 +12,7 @@ import HTTPClient
 class ViewController: UIViewController {
 
     let httpClient = HTTPClient()
+    @IBOutlet weak var responseLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,10 +21,7 @@ class ViewController: UIViewController {
     
     @IBAction func getButtonDidTouchUpInside(_ sender: UIButton) {
         httpClient.get(url: "/todos/1", params: [:], callback: { (response: HTTPResponse) in
-            print("GET request complete:")
-            print("\(response.statusCode)")
-            print("\(response.headers)")
-            print("\(response.data)")
+            self.updateLabel(method: "GET", response: response)
         })
     }
     
@@ -31,10 +29,7 @@ class ViewController: UIViewController {
         let putObject = RequestObject(userId: 1, title: "Some todo item", completed: false)
         
         httpClient.put(url: "/todos/1", params: putObject, callback: { (response: HTTPResponse) in
-            print("PUT request complete:")
-            print("\(response.statusCode)")
-            print("\(response.headers)")
-            print("\(response.data)")
+            self.updateLabel(method: "PUT", response: response)
         })
     }
 
@@ -42,11 +37,14 @@ class ViewController: UIViewController {
         let postObject = RequestObject(userId: 1, title: "Some todo item", completed: true)
         
         httpClient.post(url: "/todos", params: postObject, callback: { (response: HTTPResponse) in
-            print("POST request complete:")
-            print("\(response.statusCode)")
-            print("\(response.headers)")
-            print("\(response.data)")
+            self.updateLabel(method: "POST", response: response)
         })
+    }
+    
+    func updateLabel(method: String, response: HTTPResponse) {
+        DispatchQueue.main.async {
+            self.responseLabel.text = "\(method) request complete:\nStatus code: \(response.statusCode)\nResponse data: \(response.data)"
+        }
     }
     
 }
